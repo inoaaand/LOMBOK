@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.edu.ifpr.cars.domain.Driver;
 import br.edu.ifpr.cars.domain.DriverRepository;
 
@@ -17,7 +16,7 @@ public class DriverController {
     @Autowired //INJEÇÃO DE DEPENDÊNCIAS 
     DriverRepository driverRepository; //objeto instancia do repositório!
 
-    @GetMapping("")
+    @GetMapping("/drivers")
     public List<Driver> listDrivers(){
         return driverRepository.findAll();
     }
