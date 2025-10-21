@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifpr.cars.api.exception.ResourceNotFoundException;
 import br.edu.ifpr.cars.domain.Driver;
 import br.edu.ifpr.cars.domain.DriverRepository;
 
@@ -37,6 +38,12 @@ public class DriverController {
         return driverRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
+    }
+
+    @GetMapping("/drivers/{id}")
+    public Driver findDriver(@PathVariable("id") Long id) {
+        return driverRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Driver não encontrado com id: " + id));
     }
 
     @PostMapping("/drivers")
@@ -65,7 +72,7 @@ public class DriverController {
     }
 
     @DeleteMapping("/drivers/{id}")
-    public void deleteDriver(@PathVariable Long id){
+    public void deleteDriver(@PathVariable Long id) {
         driverRepository.deleteById(id);
     }
 
