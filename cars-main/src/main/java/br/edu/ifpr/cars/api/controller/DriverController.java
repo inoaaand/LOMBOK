@@ -36,14 +36,8 @@ public class DriverController {
     @GetMapping("/drivers/{id}")
     public Driver findDrivers(@PathVariable("id") Long id) {
         return driverRepository.findById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                () -> new ResourceNotFoundException("Driver não encontrado com id: " + id));
 
-    }
-
-    @GetMapping("/drivers/{id}")
-    public Driver findDriver(@PathVariable("id") Long id) {
-        return driverRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Driver não encontrado com id: " + id));
     }
 
     @PostMapping("/drivers")
